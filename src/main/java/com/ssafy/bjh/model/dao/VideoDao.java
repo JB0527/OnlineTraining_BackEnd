@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import com.ssafy.bjh.model.dto.Video;
 
-@Repository
 public interface VideoDao {
-	public List<Video> selectList();
+	List<Video> selectList();
 }
