@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.bjh.model.dao.review.ReviewDao">
+    <!-- 특정 비디오의 모든 리뷰 조회 -->
+    <select id="getAllReviews" parameterType="int" resultType="review">
+        SELECT * FROM review WHERE video_id = #{videoId}
+    </select>
+
+    <!-- 검색어로 리뷰 필터링 -->
+    <select id="getSearchReviews" parameterType="map" resultType="review">
+        SELECT * FROM review
+        WHERE video_id = #{videoId} AND content LIKE CONCAT('%', #{searchContent}, '%')
+    </select>
+
+    <!-- 리뷰 ID로 단일 리뷰 조회 -->
+    <select id="getReviewById" parameterType="int" resultType="review">
+        SELECT * FROM review WHERE review_id = #{reviewId}
+    </select>
+
+    <!-- 리뷰 추가 -->
+    <insert id="addReview" parameterType="review">
+        INSERT INTO review (video_id, title, content, writed_time, click_count, writer, writer_id)
+        VALUES (#{videoId}, #{title}, #{content}, #{writedTime}, #{clickCount}, #{writer}, #{writerId})
+    </insert>
+
+    <!-- 리뷰 수정 -->
+    <update id="updateReview" parameterType="review">
+        UPDATE review SET title = #{title}, content = #{content}
+        WHERE review_id = #{reviewId}
+    </update>
+
+    <!-- 리뷰 삭제 -->
+    <delete id="deleteReview" parameterType="int">
+        DELETE FROM review WHERE review_id = #{reviewId}
+    </delete>
+
+    <!-- 조회수 증가 -->
+    <update id="updateCount" parameterType="int">
+        UPDATE review SET click_count = click_count + 1 WHERE review_id = #{reviewId}
+    </update>
+
+</mapper>
