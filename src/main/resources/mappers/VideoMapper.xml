@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ssafy.bjh.model.dao.VideoDao">
+<mapper namespace="com.ssafy.bjh.model.dao.video.VideoDao">
 	<select id="selectList" resultType="video">
 		SELECT * FROM video
 	</select>

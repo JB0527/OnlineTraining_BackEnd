@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.ssafy.bjh.model.dao.VideoDao;
+import com.ssafy.bjh.model.dao.video.VideoDao;
 import com.ssafy.bjh.model.dto.Video;
 
 import lombok.RequiredArgsConstructor;
