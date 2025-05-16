@@ -1,4 +1,4 @@
-package com.ssafy.bjh.controller.video;
+package com.ssafy.bjh.controller.user;
 
 import com.ssafy.bjh.model.dto.User;
 import com.ssafy.bjh.service.user.UserService;
@@ -28,5 +28,11 @@ public class UserController {
         } else {
             return new ResponseEntity(userService.login(user), HttpStatus.OK);
         }
+    }
+
+    @PostMapping("/signup")
+    public ResponseEntity<String> signup(@RequestBody User user) {
+        boolean isSignup = userService.register(user);
+        return isSignup ? new ResponseEntity(HttpStatus.OK) : new ResponseEntity(HttpStatus.CONFLICT);
     }
 }
