@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/user")
@@ -19,6 +21,12 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody User user) {
-        return new ResponseEntity(userService.login(user), HttpStatus.OK);
+        User isUserExisted = userService.login(user);
+
+        if (Objects.isNull(isUserExisted)) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity(userService.login(user), HttpStatus.OK);
+        }
     }
 }
