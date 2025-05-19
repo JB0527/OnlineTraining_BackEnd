@@ -15,4 +15,15 @@ public class UserServiceImpl implements UserService {
     public User login(User user) {
         return userDao.selectLogin(user);
     }
+
+    @Override
+    public boolean register(User user) {
+        User alreadyUser = userDao.selectUser(user);
+        if(alreadyUser != null) {
+            return false;
+        } else {
+            userDao.insertUser(user);
+            return true;
+        }
+    }
 }

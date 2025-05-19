@@ -7,4 +7,12 @@
         SELECT id, name, email FROM user
         WHERE id = #{id} and password = #{password}
     </select>
+    <select id="selectUser" parameterType="user" resultType="user">
+        SELECT id, name, email FROM user
+        WHERE id = #{id} or email = #{email}
+    </select>
+    <insert id="insertUser" parameterType="user" >
+        INSERT INTO user(id, name, email, password)
+        VALUES (#{id}, #{name}, #{email}, #{password})
+    </insert>
 </mapper>
