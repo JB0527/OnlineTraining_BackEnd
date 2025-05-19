@@ -7,7 +7,7 @@
 		SELECT * FROM video
 	</select>
 	<select id="getVideoDetail" parameterType="int" resultType="video">
-		SELECT * FROM video WHERE id = {videoId}
+		SELECT * FROM video WHERE id = #{videoId}
 	</select>
 	<insert id="insertVideo" parameterType="int">
 		INSERT INTO video(title, part, url) 
