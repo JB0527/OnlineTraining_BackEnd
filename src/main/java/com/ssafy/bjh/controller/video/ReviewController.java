@@ -26,13 +26,14 @@ import com.ssafy.bjh.model.dao.review.ReviewDao;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/reviews")
+@RequestMapping("/api/v1/review")
 @RequiredArgsConstructor
+@CrossOrigin
 public class ReviewController {
 
     private final ReviewService reviewService;
 
-    @GetMapping("/video/{videoId}")
+    @GetMapping("/{videoId}")
     public List<Review> getReviews(@PathVariable int videoId) {
         return reviewService.getAllReviews(videoId);
     }
@@ -42,7 +43,7 @@ public class ReviewController {
         return reviewService.searchReviews(videoId, content);
     }
 
-    @GetMapping("/{reviewId}")
+    @GetMapping("/review/{reviewId}")
     public Review getReviewById(@PathVariable int reviewId) {
         return reviewService.getReviewById(reviewId);
     }
