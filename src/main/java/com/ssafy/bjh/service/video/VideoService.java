@@ -6,4 +6,8 @@ import com.ssafy.bjh.model.dto.Video;
 
 public interface VideoService {
 	List<Video> getVideoList();
+	Video getVideoDetail(int videoId);
+	boolean insertVideo(Video video);
+	boolean updateVideo(Video video);
+	boolean deleteVideo(int videoId);
 }

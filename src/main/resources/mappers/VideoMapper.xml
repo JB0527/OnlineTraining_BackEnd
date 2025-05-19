@@ -6,4 +6,19 @@
 	<select id="selectList" resultType="video">
 		SELECT * FROM video
 	</select>
+	<select id="getVideoDetail" parameterType="int" resultType="video">
+		SELECT * FROM video WHERE id = {videoId}
+	</select>
+	<insert id="insertVideo" parameterType="int">
+		INSERT INTO video(title, part, url) 
+		VALUES(#{title}, #{part}, #{url}) 
+	</insert>
+	<update id="updateVideo" parameterType="video">
+		UPDATE video 
+		SET title = #{title}, part = #{part}, url = #{url}
+		WHERE id = #{id}
+	</update>
+	<delete id="deleteVideo" parameterType="int">
+		DELETE FROM video WHERE id = #{id}
+	</delete>
 </mapper>

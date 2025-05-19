@@ -20,4 +20,24 @@ public class VideoServiceImpl implements VideoService{
 		return videoDao.selectList();
 	}
 
+	@Override
+	public Video getVideoDetail(int videoId) {
+		return videoDao.getVideoDetail(videoId);
+	}
+
+	@Override
+	public boolean insertVideo(Video video) {
+		return videoDao.updateVideo(video);
+	}
+
+	@Override
+	public boolean updateVideo(Video video) {
+		return videoDao.updateVideo(video);
+	}
+
+	@Override
+	public boolean deleteVideo(int videoId) {
+		return videoDao.deleteVideo(videoId);
+	}
+
 }
