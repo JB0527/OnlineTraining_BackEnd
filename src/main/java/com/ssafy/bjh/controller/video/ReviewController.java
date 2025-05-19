@@ -26,7 +26,7 @@ import com.ssafy.bjh.model.dao.review.ReviewDao;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/reviews")
+@RequestMapping("/api/v1/reviews")
 @RequiredArgsConstructor
 public class ReviewController {
 
@@ -53,8 +53,8 @@ public class ReviewController {
     }
 
     @PutMapping("/{reviewId}")
-    public ResponseEntity<Void> updateReview(@PathVariable int reviewId, @RequestParam String title, @RequestParam String content) {
-        reviewService.updateReview(reviewId, title, content);
+    public ResponseEntity<Void> updateReview(@PathVariable int reviewId, @RequestBody Review review) {
+        reviewService.updateReview(reviewId, review.getTitle(), review.getContent());
         return ResponseEntity.ok().build();
     }
 

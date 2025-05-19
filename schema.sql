@@ -1,3 +1,4 @@
+drop database if exists final_bjh;
 CREATE DATABASE final_bjh;
 
 use final_bjh;
@@ -43,7 +44,9 @@ ON UPDATE CASCADE;
 
 INSERT INTO user (id, name, email, password) 
 VALUES ("junn4580", "김준영", "junn4580@gmail.com", "1234"), 
-("ssafy", "ssafy", "ssafy@ssafy.com", "ssafy");
+("ssafy", "ssafy", "ssafy@ssafy.com", "ssafy"),
+("123", "123", "123@ssafy.com", "123");
+
 
 INSERT INTO video(title, part, url) 
 VALUES ("전신 다이어트 최고의 운동 [칼소폭 찐 핵핵매운맛]", "whole", "https://www.youtube.com/embed/gMaB-fG4u4g"), 
@@ -85,3 +88,5 @@ VALUES
 (8, "매일 하면 효과 확실한 듯", "5분이라 부담 없어서 꾸준히 할 수 있어요!", 19, "김준영", "junn4580"),
 (8, "누워서 해도 힘들어요!", "짧아서 쉬울 줄 알았는데 은근 힘드네요!", 14, "김준영", "junn4580"),
 (8, "운동 초보에게 딱!", "누워서 할 수 있는 운동이라서 부담 없어요!", 18, "ssafy", "ssafy");
+
+select * from user;
