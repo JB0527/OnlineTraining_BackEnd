@@ -27,7 +27,7 @@ public class VideoServiceImpl implements VideoService{
 
 	@Override
 	public boolean insertVideo(Video video) {
-		return videoDao.updateVideo(video);
+		return videoDao.insertVideo(video);
 	}
 
 	@Override
