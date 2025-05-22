@@ -1,5 +1,6 @@
 package com.ssafy.bjh.controller.user;
 
+import com.ssafy.bjh.config.JwtUtil;
 import com.ssafy.bjh.model.dto.User;
 import com.ssafy.bjh.service.user.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -18,6 +19,7 @@ import java.util.Objects;
 public class UserController {
 
     private final UserService userService;
+    private final JwtUtil jwtUtil;
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody User user) {
@@ -26,7 +28,8 @@ public class UserController {
         if (Objects.isNull(isUserExisted)) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         } else {
-            return new ResponseEntity(userService.login(user), HttpStatus.OK);
+            String token = jwtUtil.createToken(isUserExisted.getId(), isUserExisted.getName());
+            return new ResponseEntity(token, HttpStatus.OK);
         }
     }
 

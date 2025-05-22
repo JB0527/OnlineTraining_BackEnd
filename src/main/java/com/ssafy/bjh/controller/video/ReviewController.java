@@ -37,7 +37,7 @@ public class ReviewController {
 
     private final ReviewService reviewService;
 
-    @GetMapping("/{videoId}")
+    @GetMapping("/list/{videoId}")
     public List<Review> getReviews(@PathVariable int videoId) {
         return reviewService.getAllReviews(videoId);
     }
@@ -54,7 +54,7 @@ public class ReviewController {
 
     @PostMapping
     public ResponseEntity<?> addReview(@RequestBody Review review, HttpSession session) {
-    	
+        System.out.println(review);
 
 	    reviewService.addReview(review);
 	    return ResponseEntity.ok("작성 완료");
@@ -71,7 +71,7 @@ public class ReviewController {
         reviewService.deleteReview(reviewId);
     }
 
-    @PatchMapping("/{reviewId}/click")
+    @PatchMapping("/click/{reviewId}")
     public void incrementClick(@PathVariable int reviewId) {
         reviewService.incrementClickCount(reviewId);
     }

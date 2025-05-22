@@ -2,6 +2,8 @@ package com.ssafy.bjh.config;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.crypto.SecretKey;
 
@@ -18,11 +20,15 @@ public class JwtUtil {
 	private SecretKey secretKey = Keys.hmacShaKeyFor(key.getBytes(StandardCharsets.UTF_8));
 	
 	// 토큰 생성 시 다양한 데이터를 저장할 수 있음 (DTO or Map)
-	public String createToken(String name) {
+	public String createToken(String id, String name) {
 		// 유효기간
+		Map<String, Object> claims = new HashMap<>();
+		claims.put("id", id);
+		claims.put("name", name);
+
 		Date exp = new Date(System.currentTimeMillis()+1000*60*60);
 		return Jwts.builder().header().add("typ", "JWT").and()
-				.claim("name", name).expiration(exp)
+				.claims(claims).expiration(exp)
 				.signWith(secretKey).compact();
 	}
 	
