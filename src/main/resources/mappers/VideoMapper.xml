@@ -21,4 +21,8 @@
 	<delete id="deleteVideo" parameterType="int">
 		DELETE FROM video WHERE id = #{id}
 	</delete>
+	<!-- 조회수 증가 -->
+    <update id="updateCount" parameterType="int">
+        UPDATE video SET count = count + 1 WHERE id = #{id}
+    </update>
 </mapper>

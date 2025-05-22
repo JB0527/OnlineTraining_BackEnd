@@ -39,5 +39,8 @@ public class VideoServiceImpl implements VideoService{
 	public boolean deleteVideo(int videoId) {
 		return videoDao.deleteVideo(videoId);
 	}
-
+	@Override
+	public void incrementClickCount(int videoId) {
+		videoDao.updateCount(videoId);
+	}
 }

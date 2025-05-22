@@ -10,4 +10,5 @@ public interface VideoService {
 	boolean insertVideo(Video video);
 	boolean updateVideo(Video video);
 	boolean deleteVideo(int videoId);
+    void incrementClickCount(int videoId);
 }

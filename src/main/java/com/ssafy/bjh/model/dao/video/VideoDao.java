@@ -10,4 +10,6 @@ public interface VideoDao {
 	boolean insertVideo(Video video);
 	boolean updateVideo(Video video);
 	boolean deleteVideo(int videoId);
+    void updateCount(int videoId);
+
 }

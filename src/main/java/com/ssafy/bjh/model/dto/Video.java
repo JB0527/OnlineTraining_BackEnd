@@ -10,4 +10,5 @@ public class Video {
 	private String title;
 	private String part;
 	private String url;
+	private int count;
 }
