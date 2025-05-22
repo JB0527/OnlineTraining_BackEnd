@@ -33,6 +33,6 @@ public class UserController {
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody User user) {
         boolean isSignup = userService.register(user);
-        return isSignup ? new ResponseEntity(HttpStatus.OK) : new ResponseEntity(HttpStatus.CONFLICT);
+        return isSignup ? new ResponseEntity<>("200", HttpStatus.OK) : new ResponseEntity<>("409", HttpStatus.CONFLICT);
     }
 }
