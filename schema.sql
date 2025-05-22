@@ -9,7 +9,7 @@ CREATE TABLE user (
     email VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
 );
-
+	
 CREATE TABLE video (
     id INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(100) NOT NULL,
@@ -45,7 +45,7 @@ ON UPDATE CASCADE;
 INSERT INTO user (id, name, email, password) 
 VALUES ("junn4580", "김준영", "junn4580@gmail.com", "1234"), 
 ("ssafy", "ssafy", "ssafy@ssafy.com", "ssafy"),
-("123", "123", "123@ssafy.com", "123");
+("123", "정봉기", "123@ssafy.com", "123");
 
 
 INSERT INTO video(title, part, url) 
@@ -89,4 +89,4 @@ VALUES
 (8, "누워서 해도 힘들어요!", "짧아서 쉬울 줄 알았는데 은근 힘드네요!", 14, "김준영", "junn4580"),
 (8, "운동 초보에게 딱!", "누워서 할 수 있는 운동이라서 부담 없어요!", 18, "ssafy", "ssafy");
 
-select * from user;
+select * from review;

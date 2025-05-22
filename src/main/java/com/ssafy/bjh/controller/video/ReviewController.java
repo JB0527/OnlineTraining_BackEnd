@@ -1,5 +1,6 @@
 package com.ssafy.bjh.controller.video;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -19,8 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.bjh.model.dto.Video;
 import com.ssafy.bjh.service.review.ReviewService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import com.ssafy.bjh.model.dto.Review;
+import com.ssafy.bjh.model.dto.User;
+
 import org.springframework.stereotype.Service;
 import com.ssafy.bjh.model.dao.review.ReviewDao;
 import java.util.List;
@@ -49,8 +53,11 @@ public class ReviewController {
     }
 
     @PostMapping
-    public void addReview(@RequestBody Review review) {
-        reviewService.addReview(review);
+    public ResponseEntity<?> addReview(@RequestBody Review review, HttpSession session) {
+    	
+
+	    reviewService.addReview(review);
+	    return ResponseEntity.ok("작성 완료");
     }
 
     @PutMapping("/{reviewId}")
