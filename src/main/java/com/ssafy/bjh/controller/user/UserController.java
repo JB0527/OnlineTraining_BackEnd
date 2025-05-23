@@ -41,6 +41,7 @@ public class UserController {
 
 	@PutMapping("/subscribe")
 	public ResponseEntity<Void> subscribe(@RequestBody String userId) {
+		System.out.println(userId);
 		userService.subscribe(userId);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

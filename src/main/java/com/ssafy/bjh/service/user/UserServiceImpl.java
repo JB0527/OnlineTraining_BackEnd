@@ -31,6 +31,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public void subscribe(String userId) {
-		userDao.subscribe(userId.split("\"")[1]);
+		if(userId.contains("\"")) {
+			userDao.subscribe(userId.split("\"")[1]);
+			
+		} else {
+			userDao.subscribe(userId);
+		}
 	}
 }
