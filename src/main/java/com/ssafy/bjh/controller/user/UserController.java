@@ -18,24 +18,30 @@ import java.util.Objects;
 @Tag(name = "User Controller", description = "Login, Logout API")
 public class UserController {
 
-    private final UserService userService;
-    private final JwtUtil jwtUtil;
+	private final UserService userService;
+	private final JwtUtil jwtUtil;
 
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user) {
-        User isUserExisted = userService.login(user);
+	@PostMapping("/login")
+	public ResponseEntity<String> login(@RequestBody User user) {
+		User isUserExisted = userService.login(user);
 
-        if (Objects.isNull(isUserExisted)) {
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
-        } else {
-            String token = jwtUtil.createToken(isUserExisted.getId(), isUserExisted.getName());
-            return new ResponseEntity(token, HttpStatus.OK);
-        }
-    }
+		if (Objects.isNull(isUserExisted)) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} else {
+			String token = jwtUtil.createToken(isUserExisted);
+			return new ResponseEntity<>(token, HttpStatus.OK);
+		}
+	}
 
-    @PostMapping("/signup")
-    public ResponseEntity<String> signup(@RequestBody User user) {
-        boolean isSignup = userService.register(user);
-        return isSignup ? new ResponseEntity<>("200", HttpStatus.OK) : new ResponseEntity<>("409", HttpStatus.CONFLICT);
-    }
+	@PostMapping("/signup")
+	public ResponseEntity<String> signup(@RequestBody User user) {
+		boolean isSignup = userService.register(user);
+		return isSignup ? new ResponseEntity<>("200", HttpStatus.OK) : new ResponseEntity<>("409", HttpStatus.CONFLICT);
+	}
+
+	@PutMapping("/subscribe")
+	public ResponseEntity<Void> subscribe(@RequestBody String userId) {
+		userService.subscribe(userId);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 }

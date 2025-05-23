@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.bjh.model.dao.user.UserDao">
     <select id="selectLogin" parameterType="user" resultType="user">
-        SELECT id, name, email FROM user
+        SELECT id, name, email, is_subscribed FROM user
         WHERE id = #{id} and password = #{password}
     </select>
     <select id="selectUser" parameterType="user" resultType="user">
@@ -15,4 +15,9 @@
         INSERT INTO user(id, name, email, password)
         VALUES (#{id}, #{name}, #{email}, #{password})
     </insert>
+    <update id="subscribe" parameterType="string">
+    	UPDATE user
+    	SET is_subscribed = 1
+    	WHERE id = #{userId}
+    </update>
 </mapper>

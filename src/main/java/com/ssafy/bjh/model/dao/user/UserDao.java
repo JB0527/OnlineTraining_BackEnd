@@ -6,4 +6,5 @@ public interface UserDao {
     User selectLogin(User user);
     User selectUser(User user);
     int insertUser(User user);
+	void subscribe(String userId);
 }

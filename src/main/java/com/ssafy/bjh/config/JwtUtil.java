@@ -9,6 +9,8 @@ import javax.crypto.SecretKey;
 
 import org.springframework.stereotype.Component;
 
+import com.ssafy.bjh.model.dto.User;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -20,11 +22,12 @@ public class JwtUtil {
 	private SecretKey secretKey = Keys.hmacShaKeyFor(key.getBytes(StandardCharsets.UTF_8));
 	
 	// 토큰 생성 시 다양한 데이터를 저장할 수 있음 (DTO or Map)
-	public String createToken(String id, String name) {
+	public String createToken(User user) {
 		// 유효기간
 		Map<String, Object> claims = new HashMap<>();
-		claims.put("id", id);
-		claims.put("name", name);
+		claims.put("id", user.getId());
+		claims.put("name", user.getName());
+		claims.put("isSubscribed", user.isSubscribed());
 
 		Date exp = new Date(System.currentTimeMillis()+1000*60*60);
 		return Jwts.builder().header().add("typ", "JWT").and()
