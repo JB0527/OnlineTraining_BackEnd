@@ -15,9 +15,9 @@
         INSERT INTO user(id, name, email, password)
         VALUES (#{id}, #{name}, #{email}, #{password})
     </insert>
-    <update id="subscribe" parameterType="string">
+    <update id="subscribe" parameterType="String">
     	UPDATE user
-    	SET is_subscribed = 1
+    	SET is_subscribed = true
     	WHERE id = #{userId}
     </update>
 </mapper>

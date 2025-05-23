@@ -4,6 +4,7 @@ import com.ssafy.bjh.model.dao.user.UserDao;
 import com.ssafy.bjh.model.dto.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,7 +29,8 @@ public class UserServiceImpl implements UserService {
     }
 
 	@Override
+	@Transactional
 	public void subscribe(String userId) {
-		userDao.subscribe(userId);
+		userDao.subscribe(userId.split("\"")[1]);
 	}
 }
