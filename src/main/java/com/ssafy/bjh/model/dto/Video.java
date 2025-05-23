@@ -11,4 +11,6 @@ public class Video {
 	private String part;
 	private String url;
 	private int count;
+	private String writer;
+	private String writerId;
 }

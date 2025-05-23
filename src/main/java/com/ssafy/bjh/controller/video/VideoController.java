@@ -40,7 +40,7 @@ public class VideoController {
 		return new ResponseEntity<>(video, HttpStatus.OK);
 	}
 	
-	@PostMapping
+	@PostMapping("/insert")
 	public ResponseEntity<String> insertVideo(@RequestBody Video video) {
 		boolean res = videoService.insertVideo(video);
 		
@@ -54,7 +54,7 @@ public class VideoController {
 		return new ResponseEntity<>(String.valueOf(res), HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/{videoId}")
+	@DeleteMapping("/delete/{videoId}")
 	public ResponseEntity<String> deleteVideo(@PathVariable("videoId") int videoId) {
 		boolean res = videoService.deleteVideo(videoId);
 		

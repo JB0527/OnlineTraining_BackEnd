@@ -10,8 +10,8 @@
 		SELECT * FROM video WHERE id = #{videoId}
 	</select>
 	<insert id="insertVideo" parameterType="video">
-		INSERT INTO video(title, part, url) 
-		VALUES(#{title}, #{part}, #{url}) 
+		INSERT INTO video(title, part, url, writer, writer_id) 
+		VALUES(#{title}, #{part}, #{url}, #{writer}, #{writerId}) 
 	</insert>
 	<update id="updateVideo" parameterType="video">
 		UPDATE video 
@@ -19,7 +19,7 @@
 		WHERE id = #{id}
 	</update>
 	<delete id="deleteVideo" parameterType="int">
-		DELETE FROM video WHERE id = #{id}
+		DELETE FROM video WHERE id = #{videoId}
 	</delete>
 	<!-- 조회수 증가 -->
     <update id="updateCount" parameterType="int">
