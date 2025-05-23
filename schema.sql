@@ -1,21 +1,28 @@
-drop database if exists final_bjh;
+DROP DATABASE IF EXISTS final_bjh;
 CREATE DATABASE final_bjh;
 
 use final_bjh;
+
+DROP TABLE IF EXISTS review;
+DROP TABLE IF EXISTS video;
+DROP TABLE IF EXISTS user;
 
 CREATE TABLE user (
     id VARCHAR(100) PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    is_subscribed BOOL NOT NULL DEFAULT FALSE
 );
-	
+
 CREATE TABLE video (
     id INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(100) NOT NULL,
     part VARCHAR(20) NOT NULL,
     url VARCHAR(255),
-    count INT UNSIGNED DEFAULT 0
+    count INT UNSIGNED DEFAULT 0,
+    writer VARCHAR(100) DEFAULT '익명의 누군가',
+    writer_id VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE review (
@@ -36,27 +43,34 @@ ON DELETE CASCADE
 ON UPDATE CASCADE;
 
 -- writer_id 외래 키: 사용자 삭제 시 NULL로 변경하여 리뷰 보존
-ALTER TABLE review 
+ALTER TABLE review
 ADD CONSTRAINT FK_review_user FOREIGN KEY (writer_id) REFERENCES user(id) 
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+ALTER TABLE video
+ADD CONSTRAINT FK_video_user FOREIGN KEY (writer_id) REFERENCES user(id) 
 ON DELETE CASCADE
 ON UPDATE CASCADE;
 
 
 INSERT INTO user (id, name, email, password) 
 VALUES ("junn4580", "김준영", "junn4580@gmail.com", "1234"), 
-("ssafy", "ssafy", "ssafy@ssafy.com", "ssafy"),
-("123", "정봉기", "123@ssafy.com", "123");
+("ssafy", "ssafy", "ssafy@ssafy.com", "ssafy");
 
+UPDATE user
+        SET is_subscribed = 1
+        WHERE id = "junn4580";
 
-INSERT INTO video(title, part, url) 
-VALUES ("전신 다이어트 최고의 운동 [칼소폭 찐 핵핵매운맛]", "whole", "https://www.youtube.com/embed/gMaB-fG4u4g"), 
-("하루 15분! 전신 칼로리 불태우는 다이어트 운동", "whole","https://www.youtube.com/embed/swRNeYw1JkY"), 
-("상체 다이어트 최고의 운동 BEST [팔뚝살/겨드랑이살/등살/가슴어깨라인]", "upper","https://www.youtube.com/embed/54tTYO-vU2E"), 
-("상체비만 다이어트 최고의 운동 [상체 핵매운맛]", "upper", "https://www.youtube.com/embed/QqqZH3j_vH0"),
-("하체운동이 중요한 이유? 이것만 보고 따라하자 ! [하체운동 교과서]", "lower", "https://www.youtube.com/embed/tzN6ypk6Sps"),
-("저는 하체 식주의자 입니다", "lower", "https://www.youtube.com/embed/u5OgcZdNbMo"),
-("11자복근 복부 최고의 운동 [복근 핵매운맛]", "abdomen","https://www.youtube.com/embed/PjGcOP-TQPE"),
-("(Sub)누워서하는 5분 복부운동!! 효과보장! (매일 2주만 해보세요!)", "abdomen", "https://www.youtube.com/embed/7TLk7pscICk");
+INSERT INTO video(title, part, url, writer, writer_id) 
+VALUES ("전신 다이어트 최고의 운동 [칼소폭 찐 핵핵매운맛]", "whole", "https://www.youtube.com/embed/gMaB-fG4u4g", "김준영", "junn4580"), 
+("하루 15분! 전신 칼로리 불태우는 다이어트 운동", "whole","https://www.youtube.com/embed/swRNeYw1JkY", "김준영", "junn4580"), 
+("상체 다이어트 최고의 운동 BEST [팔뚝살/겨드랑이살/등살/가슴어깨라인]", "upper","https://www.youtube.com/embed/54tTYO-vU2E", "김준영", "junn4580"), 
+("상체비만 다이어트 최고의 운동 [상체 핵매운맛]", "upper", "https://www.youtube.com/embed/QqqZH3j_vH0", "김준영", "junn4580"),
+("하체운동이 중요한 이유? 이것만 보고 따라하자 ! [하체운동 교과서]", "lower", "https://www.youtube.com/embed/tzN6ypk6Sps", "김준영", "junn4580"),
+("저는 하체 식주의자 입니다", "lower", "https://www.youtube.com/embed/u5OgcZdNbMo", "김준영", "junn4580"),
+("11자복근 복부 최고의 운동 [복근 핵매운맛]", "abdomen","https://www.youtube.com/embed/PjGcOP-TQPE", "김준영", "junn4580"),
+("(Sub)누워서하는 5분 복부운동!! 효과보장! (매일 2주만 해보세요!)", "abdomen", "https://www.youtube.com/embed/7TLk7pscICk", "김준영", "junn4580");
 
 INSERT INTO review(video_id, title, content, click_count, writer, writer_id) 
 VALUES 
@@ -88,5 +102,3 @@ VALUES
 (8, "매일 하면 효과 확실한 듯", "5분이라 부담 없어서 꾸준히 할 수 있어요!", 19, "김준영", "junn4580"),
 (8, "누워서 해도 힘들어요!", "짧아서 쉬울 줄 알았는데 은근 힘드네요!", 14, "김준영", "junn4580"),
 (8, "운동 초보에게 딱!", "누워서 할 수 있는 운동이라서 부담 없어요!", 18, "ssafy", "ssafy");
-
-select * from review;
