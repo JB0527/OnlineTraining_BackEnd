@@ -6,6 +6,9 @@
 	<select id="selectList" resultType="video">
 		SELECT * FROM video
 	</select>
+	<select id="selectListDesc" resultType="video">
+		SELECT * FROM video ORDER BY count DESC
+	</select>
 	<select id="getVideoDetail" parameterType="int" resultType="video">
 		SELECT * FROM video WHERE id = #{videoId}
 	</select>

@@ -34,6 +34,12 @@ public class VideoController {
 		return new ResponseEntity<>(videos, HttpStatus.OK);
 	}
 	
+	@GetMapping("/desc")
+	public ResponseEntity<List<Video>> getVideoListCountDesc() {
+		List<Video> videos = videoService.getVideoListCountDesc();
+		return new ResponseEntity<>(videos, HttpStatus.OK);
+	}
+	
 	@GetMapping("/{videoId}")
 	public ResponseEntity<Video> getVideoDetail(@PathVariable("videoId") int videoId) {
 		Video video = videoService.getVideoDetail(videoId);

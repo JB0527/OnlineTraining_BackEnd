@@ -43,4 +43,9 @@ public class VideoServiceImpl implements VideoService{
 	public void incrementClickCount(int videoId) {
 		videoDao.updateCount(videoId);
 	}
+
+	@Override
+	public List<Video> getVideoListCountDesc() {
+		return videoDao.selectListDesc();
+	}
 }
